@@ -13,12 +13,15 @@ def test_valid_response(response):
 
 def test_email_form(response):
     assert b"<form" in response.data
-    # TODO must be valid email
-    # assert form submit response
-
 
 
 def test_start_test(response):
     assert "start test" in str(response.data).lower()
 
-    
+
+def test_start_test_invalid_email(client):
+    pass
+
+
+def test_start_test_valid_email(client):
+    pass

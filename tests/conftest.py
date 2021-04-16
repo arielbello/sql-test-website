@@ -1,7 +1,6 @@
 from app.main import app
 import pytest
 
-print("conftest")
 
 @pytest.fixture(scope="session")
 def client():
@@ -10,3 +9,13 @@ def client():
             # context config
             pass
         yield client
+
+
+@pytest.fixture(scope="session")
+def valid_email():
+    return "test_user@sqltest.com"
+
+
+@pytest.fixture(scope="session")
+def invalid_email():
+    return "--; DROP * FROM User"
