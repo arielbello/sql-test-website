@@ -1,8 +1,14 @@
 from app.main import app
+from flask import session
 import pytest
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture
+def flask_app():
+    return app
+
+
+@pytest.fixture
 def client():
     with app.test_client() as client:
         with app.app_context():

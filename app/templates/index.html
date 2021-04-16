@@ -2,6 +2,18 @@
 Welcome to the index!
 
 <form action={{action}} method="POST">
-    <p><input required name="email" placeholder="your email"/></p>
-    <p><input type="submit" value="Start Test"/></p>
+    {{ form.csrf_token }}
+    <p>{{ form.email }}</p>
+
+    {% if form.errors %}
+    <ul class="error">
+        {% for field, error_list in form.errors.items() %}
+            {% for error in error_list %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <p>{{ form.submit }}</p>
 </form>
