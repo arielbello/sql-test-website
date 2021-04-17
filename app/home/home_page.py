@@ -1,19 +1,9 @@
 from flask import Blueprint, url_for, redirect, request
 from flask import render_template, session
-from flask_wtf import FlaskForm
-from wtforms.fields import StringField
-from wtforms.fields import SubmitField
-from wtforms.validators import Email as EmailValidator
-from wtforms.validators import DataRequired
+from .forms import EmailForm
 
 
 home = Blueprint("home", __name__)
-
-
-class EmailForm(FlaskForm):
-    email = StringField("email", validators=[DataRequired(), EmailValidator()], 
-        render_kw={"placeholder": "enter your email"})
-    submit = SubmitField("Start Test")
 
 
 def render_form(form):

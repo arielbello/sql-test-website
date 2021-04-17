@@ -1,5 +1,6 @@
 import datetime
 
+
 class Config(object):
     APPLICATION_ROOT = '/'
     DEBUG = False
@@ -15,7 +16,7 @@ class Config(object):
     PREFERRED_URL_SCHEME = 'http'
     PRESERVE_CONTEXT_ON_EXCEPTION = None
     PROPAGATE_EXCEPTIONS = None
-    # TODO set a ke
+    # TODO set a key when deploying
     SECRET_KEY = '<secret_key>'
     SEND_FILE_MAX_AGE_DEFAULT = datetime.timedelta(seconds=43200)
     SERVER_NAME = None

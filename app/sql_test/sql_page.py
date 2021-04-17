@@ -1,24 +1,13 @@
 from flask import Blueprint, request, render_template, session, url_for
-from app.routes import Routes
 from email_validator import validate_email, EmailNotValidError
-from flask_wtf import FlaskForm
-from wtforms.fields import TextAreaField, SubmitField
-from wtforms.validators import DataRequired
+from .forms import SqlForm
 
 
 sqltest = Blueprint("sqltest", __name__)
 
 
-class SqlForm(FlaskForm):
-    sql = TextAreaField("email", validators=[DataRequired()], 
-        render_kw={"placeholder": "Write your query here"})
-    submit = SubmitField("Submit", _name="submit")
-    run = SubmitField("Run", _name="run")
-
-
 @sqltest.route("/", methods=["POST"])
 def submit_query():
-    form = SqlForm()
     print("query submitted")
     if request.form.get("run"):
         print("running query")
@@ -37,5 +26,5 @@ def test_index():
         return "400"
 
     sql_form = SqlForm()
-    return render_template("sqltest.html", form=sql_form, 
-    action=url_for("sqltest.submit_query"))
+    return render_template("sqltest.html", form=sql_form,
+                           action=url_for("sqltest.submit_query"))
