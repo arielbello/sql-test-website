@@ -5,5 +5,6 @@
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.nosetestsEnabled": false,
-    "python.testing.pytestEnabled": true
+    "python.testing.pytestEnabled": true,
+    "cornflakes.linter.executablePath": "venv/Scripts/flake8.exe"
 }
