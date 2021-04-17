@@ -1,1 +1,23 @@
-SQL test
+{% extends "base.html" %}
+
+{% block content %}
+
+SQL Test page
+
+<form action={{action}} method="POST">
+    {{ form.csrf_token }}
+
+    <p>{{ form.sql }}</p>
+
+    {% if form.errors %}
+    <ul class="error">
+        {% for error in form.errors %}    
+            <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <p>{{ form.run }} {{ form.submit }} </p>
+</form>
+
+{% endblock %}

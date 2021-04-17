@@ -1,5 +1,5 @@
-from flask import Blueprint, url_for, redirect, request, render_template, session
-from app.routes import Routes
+from flask import Blueprint, url_for, redirect, request
+from flask import render_template, session
 from flask_wtf import FlaskForm
 from wtforms.fields import StringField
 from wtforms.fields import SubmitField
@@ -17,7 +17,7 @@ class EmailForm(FlaskForm):
 
 
 def render_form(form):
-    return render_template("index.html", form=form, action=Routes.SUBMIT)
+    return render_template("index.html", form=form, action="submit")
 
 
 @home.route("/")
@@ -26,15 +26,12 @@ def index():
     return render_form(form)
 
 
-@home.route(Routes.SUBMIT, methods=["POST"])
+@home.route("submit", methods=["POST"])
 def submit():
-    # TODO 
     form = EmailForm()
-    
     if form.validate_on_submit():
         session["email"] = request.form.get("email")
         session["permanent"] = True
-        return redirect(Routes.SQL_TEST)
+        return redirect(url_for("sqltest.test_index"))
     else:
-        print(form.errors)
         return render_form(form)
