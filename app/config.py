@@ -4,6 +4,7 @@ import datetime
 class Config(object):
     APPLICATION_ROOT = '/'
     DEBUG = False
+    DB_FOLDER = 'app/sql_test/assets/'
     ENV = 'production'
     EXPLAIN_TEMPLATE_LOADING = False
     JSONIFY_MIMETYPE = 'application/json'
@@ -35,17 +36,19 @@ class Config(object):
 
 
 class ProductionConfig(Config):
-    DB_NAME = "<production-db>"
+    DB_NAME = "test.db"
     DB_USERNAME = "<username>"
     DB_PASSWORD = "<password>"
+    DB_PATH = Config.DB_FOLDER + DB_NAME
 
 
 class DevelopmentConfig(Config):
     DEBUG = True
     ENV = "development"
-    DB_NAME = "<development-db>"
+    DB_NAME = "test.db"
     DB_USERNAME = "<username>"
     DB_PASSWORD = "<password>"
+    DB_PATH = Config.DB_FOLDER + DB_NAME
 
     SESSION_COOKIE_SECURE = False
 
@@ -53,8 +56,9 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     TESTING = True
     ENV = "test"
-    DB_NAME = "<test-db>"
+    DB_NAME = "test.db"
     DB_USERNAME = "<username>"
     DB_PASSWORD = "<password>"
+    DB_PATH = Config.DB_FOLDER + DB_NAME
 
     SESSION_COOKIE_SECURE = False

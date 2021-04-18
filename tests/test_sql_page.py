@@ -1,5 +1,4 @@
 from app.routes import Routes
-from flask import session
 import pytest
 
 
@@ -49,6 +48,14 @@ def test_run_query(client):
 def test_submit(client):
     assert "submit" in str(response.data).lower()
     # TODO mock user and test database response
-    # TODO check send user reference (email), execution time, query string, correct answer
+    ''' TODO check send user reference (email), execution time, query
+    string, correct answer '''
+    # TODO check result matches this query results
+    ''' SELECT G.device_cat, COUNT(DISTINCT g.user_id) FROM users U
+        INNER JOIN google_users G ON G.user_id=U.user_id
+            AND last_login LIKE '%2019-07%'
+        GROUP BY device_cat
+        ORDER BY COUNT(DISTINCT g.user_id)
+    '''
     # TODO prevent SQL injection
     # TODO check confirmation message

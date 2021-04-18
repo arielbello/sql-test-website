@@ -1,5 +1,6 @@
 from flask import Blueprint, request, render_template, session, url_for
 from email_validator import validate_email, EmailNotValidError
+from .query_controller import run_query, check_result
 from .forms import SqlForm
 
 
@@ -8,11 +9,16 @@ sqltest = Blueprint("sqltest", __name__)
 
 @sqltest.route("/", methods=["POST"])
 def submit_query():
-    print("query submitted")
+    form = SqlForm()
     if request.form.get("run"):
-        print("running query")
+        # TODO try catch
+        result = run_query(form.sql.data)
+        print("run query")
+        print(result)
     elif request.form.get("submit"):
-        print("submitting query")
+        accepted = check_result(form.sql.data)
+        print("submitted")
+        print(accepted)
     return test_index()
 
 
