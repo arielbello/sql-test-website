@@ -6,6 +6,5 @@ from wtforms.validators import DataRequired
 
 
 class EmailForm(FlaskForm):
-    email = EmailField("email", validators=[DataRequired(), EmailValidator()],
-                       render_kw={"placeholder": "enter your email"})
+    email = EmailField("Email", validators=[DataRequired(), EmailValidator()])
     submit = SubmitField("Start Test")

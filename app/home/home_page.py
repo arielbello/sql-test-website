@@ -7,7 +7,7 @@ home = Blueprint("home", __name__)
 
 
 def render_form(form):
-    return render_template("index.html", form=form, action="submit")
+    return render_template("index.html", form=form, action="/")
 
 
 @home.route("/")
@@ -16,7 +16,7 @@ def index():
     return render_form(form)
 
 
-@home.route("submit", methods=["POST"])
+@home.route("/", methods=["POST"])
 def submit():
     form = EmailForm()
     if form.validate_on_submit():
