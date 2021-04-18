@@ -1,0 +1,25 @@
+body {
+    height: 100%;
+}
+
+div.container {
+    height: 100%;
+    width : 50%;
+}
+
+.alert {
+    padding: 4px;
+    width: 100%;
+    margin: auto;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+h1 {
+    color: darkgray;
+    text-align: center;
+}
+
+.btn-primary { 
+    /* background-color : yellowgreen; */
+}

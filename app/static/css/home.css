@@ -1,0 +1,25 @@
+.email-container {
+    width: 300px;
+    margin: auto;
+}
+
+.container {
+    vertical-align: auto;
+    margin: auto;
+    margin-top: 50px;
+    text-align: center;
+}
+
+p.text {
+    margin-top: 50px;
+}
+
+input.email {
+    width: 100%;
+    margin: auto;
+}
+
+.btn-primary {
+    margin-top: 20px;
+    width: 90%;
+}

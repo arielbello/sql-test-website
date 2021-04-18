@@ -7,7 +7,7 @@ home = Blueprint("home", __name__)
 
 
 def render_form(form):
-    return render_template("index.html", form=form, action="/")
+    return render_template("home.html", form=form, action="/")
 
 
 @home.route("/")

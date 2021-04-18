@@ -1,0 +1,13 @@
+.form-buttons {
+    float: right;
+}
+
+.form-sql {
+    margin: auto;
+    height: 300px;
+    width: 100%;
+}
+
+input.btn {
+    width: 100px;
+}
