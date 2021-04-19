@@ -1,0 +1,17 @@
+<form action={{action}} method="POST">
+    {{ form.csrf_token }}
+
+    {{ form.sql(class="form-sql bordered", placeholder="Write your query here.\nExample:\nSELECT * FROM Users") }}
+
+    {% if form.errors %}
+    <!-- server side errors -->
+    
+    {% endif %}
+
+    <div class="form-buttons">
+        <span> {{ form.run(class="btn btn-secondary") }} </span>
+        <span> {{ form.submit(class="btn btn-primary") }} </span>
+    </div>
+</form>
+
+<!-- TODO create table with results -->

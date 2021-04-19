@@ -1,0 +1,128 @@
+<div class="question bordered" id="question-container">
+
+    <h2>Most common devices</h2>
+    <hr>
+    <p id="question-text">
+        Write a query to get the number of unique Google users
+        whose last login was in July, 2019, broken down by device type. 
+        Show the most used device in that period first.
+    </p>
+
+    <div class="db-schema">
+        <h3 id="schema-title">Database Schema</h3>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <h4 class="table-name">Users</h4>
+                <table class="table table-secondary">
+                    <thead>
+                    <tr>
+                        <th scope="col">column</th>
+                        <th scope="col">type</th>
+                        <th scope="col">nullable</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>user_id</td>
+                        <td>int</td>
+                        <td>not null</td>
+                    </tr>
+                    <tr>
+                        <td>is_activated</td>
+                        <td>boolean</td>
+                        <td>not null</td>
+                    </tr>
+                    <tr>
+                        <td>signed_up_on</td>
+                        <td>datetime</td>
+                        <td>not null</td>
+                    </tr>
+                    <tr>
+                        <td>last_login</td>
+                        <td>datetime</td>
+                        <td>nullable</td>
+                    </tr>
+                    <tr>
+                        <td>sign_up_source</td>
+                        <td>string</td>
+                        <td>nullable</td>
+                    </tr>
+                    <tr>
+                        <td>unsubscribed</td>
+                        <td>tinyint</td>
+                        <td>not null</td>
+                    </tr>
+                    <tr>
+                        <td>user_type</td>
+                        <td>tinyint</td>
+                        <td>not null</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        
+
+            <div class="col-sm-6">
+                <h4 class="table-name">Google_Users</h4>
+                <table class="table table-secondary">
+                    <thead>
+                    <tr>
+                        <th scope="col">column</th>
+                        <th scope="col">type</th>
+                        <th scope="col">nullable</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>id</td>
+                        <td>int</td>
+                        <td>not null</td>
+                    </tr>
+                    <tr>
+                        <td>user_id</td>
+                        <td>int</td>
+                        <td>not null</td>
+                    </tr>
+                    <tr>
+                        <td>browser_language_code</td>
+                        <td>string</td>
+                        <td>not null</td>
+                    </tr>
+                    <tr>
+                        <td>created_on</td>
+                        <td>datetime</td>
+                        <td>not null</td>
+                    </tr>
+                    <tr>
+                        <td>device_cat</td>
+                        <td>string</td>
+                        <td>not null</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div id="question-output">
+        <h3>Expected Output:</h3>
+        <table class="table table-striped">
+            <tr>
+                <td>Desktop</td>
+                <td>99</td>
+            </tr>
+            <tr>
+                <td>Mobile</td>
+                <td>43</td>
+            </tr>
+            <tr>
+                <td>Tablet</td>
+                <td>16</td>
+            </tr>
+        </table>
+    </div>
+
+</div>

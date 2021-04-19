@@ -1,5 +1,4 @@
 from app.routes import Routes
-from email_validator import EmailNotValidError, validate_email
 import pytest
 
 
@@ -18,7 +17,6 @@ def test_email_form(response):
 
 def test_start_test(response):
     assert "start test" in str(response.data).lower()
-    assert "submit" in str(response.data).lower()
 
 
 def test_invalid_email(client, invalid_email):

@@ -3,9 +3,8 @@ import pytest
 
 
 @pytest.fixture
-def response(flask_app, valid_email):
-    with flask_app.test_client() as client:
-        yield client.get(Routes.SQL_TEST)
+def response(client, valid_email):
+    return client.get(Routes.SQL_TEST)
 
 
 @pytest.mark.skip(reason="unable to access current session")
@@ -18,16 +17,19 @@ def test_invalid_email(client):
     assert response.status_code != 200
 
 
-def test_has_multiline_form(response):
+def test_has_multiline_form(client):
+    response = client.get(Routes.SQL_TEST)
     assert b"form" in response.data
 
 
 def test_has_schema(response):
-    assert b"schema" in response.data
+    assert "schema" in str(response.data).lower()
 
 
-def test_has_question(response):
-    assert b"question" in response.data
+def test_has_db_tables(response):
+    assert "users" in str(response.data).lower()
+    assert "users" in str(response.data).lower()
+    assert "google_users" in str(response.data).lower()
 
 
 @pytest.mark.skip(reason="too involved to test")
@@ -45,7 +47,7 @@ def test_run_query(client):
     # TODO prevent SQL injection
 
 
-def test_submit(client):
+def test_submit(response):
     assert "submit" in str(response.data).lower()
     # TODO mock user and test database response
     ''' TODO check send user reference (email), execution time, query

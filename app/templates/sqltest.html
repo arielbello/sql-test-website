@@ -9,25 +9,20 @@
 {% block content %}
 
 <div class="container">
-
+    
     <h1> SQL Test Page </h1>
     <hr>
 
-    <form action={{action}} method="POST">
-        {{ form.csrf_token }}
-
-        {{ form.sql(class="form-sql", placeholder="Write your query here.") }}
-
-        {% if form.errors %}
-        <!-- server side errors -->
-        
-        {% endif %}
-
-        <div class="form-buttons">
-            <span> {{ form.run(class="btn btn-secondary") }} </span>
-            <span> {{ form.submit(class="btn btn-primary") }} </span>
+    <div class="row">
+        <div class="col-lg-6 question">
+            {% include "sqltest_question.html" %}
         </div>
-    </form>
+
+        <div class="col-lg-6" id="sql-box">
+            {% include "sqltest_input.html" %}
+        </div>
+    </div>
 
 </div>
+
 {% endblock %}

@@ -25,7 +25,6 @@ def submit_query():
 @sqltest.route("/", methods=["GET"])
 def test_index():
     email = session.get("email")
-    print("sqltest", email)
     try:
         email = validate_email(email, check_deliverability=False)
     except EmailNotValidError:

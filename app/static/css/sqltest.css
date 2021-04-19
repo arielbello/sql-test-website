@@ -1,13 +1,67 @@
-.form-buttons {
-    float: right;
-}
-
-.form-sql {
-    margin: auto;
-    height: 300px;
-    width: 100%;
+div.container {
+    width: 90%;
+    height: 100%;
+    margin-bottom: 20px;
 }
 
 input.btn {
     width: 100px;
+}
+
+.col-sm-6 {
+    word-break: break-word;
+}
+
+.table {
+    border-color: lightgray;
+    border-width: 1px;
+    border-style: solid;
+    word-wrap: break-word;
+    max-width: 320px;
+    padding: 5px 10px;
+}
+
+.bordered {
+    border-radius: 10px;
+    border-color: lightgray;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.form-sql {
+    resize: vertical;
+    height: 200px;
+    min-height: 45px;
+    width: 100%;
+    margin: auto;
+    padding: 10px;
+    border-color: #333;
+    font-family: monospace;
+    font-size: large;
+}
+
+.form-buttons {
+    float: right;
+}
+
+.table-name {
+    font-weight: bold;
+}
+
+#question-container {
+    padding: 0px 30px;
+    margin-bottom: 20px;
+}
+
+#question-text {
+    font-size: medium;
+}
+
+#schema-title {
+    margin-bottom: 20px;
+}
+
+#question-output {
+    max-width: 320px;
+    min-width: fit-content;
 }
