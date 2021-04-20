@@ -1,0 +1,35 @@
+header {
+    background-color: white;
+    /* background-color: rgb(240, 226, 36); */
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: lightgray;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 52px;
+    margin: 0px 5% 0px 5%;
+}
+
+.header-item {
+    flex-basis: 40px;
+    flex-grow: 1;
+    font-family: 'Limelight', sans-serif;
+    font-size: 24px;
+}
+
+.header-item.left {
+    text-align: left;
+}
+
+.header-item.center {
+    text-align: center;
+    min-width: 80px;
+}
+
+.header-item.right {
+    text-align: right;
+}

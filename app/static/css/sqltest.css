@@ -17,7 +17,7 @@ input.btn {
     border-width: 1px;
     border-style: solid;
     word-wrap: break-word;
-    max-width: 320px;
+    max-width: 400px;
     padding: 5px 10px;
 }
 
@@ -54,7 +54,7 @@ input.btn {
 }
 
 #question-text {
-    font-size: medium;
+    font-size: large;
 }
 
 #schema-title {

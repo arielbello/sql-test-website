@@ -1,8 +1,3 @@
-.email-container {
-    width: 300px;
-    margin: auto;
-}
-
 .container {
     vertical-align: auto;
     margin: auto;
@@ -10,16 +5,43 @@
     text-align: center;
 }
 
-p.text {
-    margin-top: 50px;
+.intro-text {
+    font-family: serif;
+}
+
+.header {
+    font-size: 40px;
+    margin: 50px 0px 40px;
+}
+
+.bullet-points {
+    margin: 8px 0px;
+}
+
+.email-container {
+    width: 300px;
+    margin: auto;
+    margin-top: 60px;
+    font-family: sans-serif;
+}
+
+.email-label {
+    font-size:medium;
+    text-align: left;
+    font-weight: lighter;
+    margin-bottom: 4px;
+    color: #202020;
 }
 
 input.email {
     width: 100%;
+    height: 40px;
     margin: auto;
+    font-size: large;
 }
 
 .btn-primary {
-    margin-top: 20px;
-    width: 90%;
+    margin-top: 10px;
+    width: 100%;
+    background-color: #6f4aa0;
 }
