@@ -8,31 +8,42 @@
 {% block title %} SQL Test home {% endblock %}
 
 {% block content %}
+{{ super() }}
 
-    <div class="container">
+<div class="container">
 
-        <h1> Welcome to The Awesome SQL Test! </h1>
-        <hr>
+    <div class="intro-text">
+        <h2 class="header"> Welcome to the Awesome SQL Test! </h2>
 
-        <p class="lead text"> Please inform your email to take the test </p>
-
-        <form action={{action}} class="form-floating" method="POST">
-            {{ form.csrf_token }}
-
-            <div class="email-container">
-
-                {% if form.errors %}
-                    {% for error in form.email.errors %}
-                    <div class="alert alert-danger" role="alert">
-                        {{ error }}
-                    </div>
-                    {% endfor %}
-                {% endif %}
-                <p>{{ form.email(class="email form-control form-control-lg", placeholder="example@email.com") }}</p>    
-                <p>{{ wtf.form_field(form.submit, class="btn btn-primary btn-lg") }} </p>
-
+        <!-- <p class="lead text"> 
+            Test your SQL skills online
+        </p> -->
+        <div class="lead center-align">
+            <div class="bullet-points">
+                - Run your queries and see results instantly
             </div>
-        </form>
-
+            <div class="bullet-points">
+                - Relevant questions solving actual problems
+            </div>
+            <div class="bullet-points">
+                - No installation required
+            </div>
+        </div>
     </div>
+    <form action={{action}} class="form-floating" method="POST">
+        {{ form.csrf_token }}
+        <div class="email-container">
+            <p class="email-label text-center">Enter your email to start</p>
+            {% if form.errors %}
+                {% for error in form.email.errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{ error }}
+                </div>
+                {% endfor %}
+            {% endif %}
+            <p>{{ form.email(class="email form-control form-control-lg", placeholder="example@email.com") }}</p>    
+            <p>{{ wtf.form_field(form.submit, class="btn btn-primary btn-lg") }} </p>
+        </div>
+    </form>
+</div>
 {% endblock %}
