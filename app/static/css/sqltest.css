@@ -79,6 +79,14 @@ table {
     margin-bottom: 20px;
 }
 
+#test-header {
+    margin-left: 40px;
+}
+
+#question-title {
+   
+}
+
 #question-text {
     font-size: large;
 }
@@ -90,4 +98,8 @@ table {
 #question-output {
     max-width: 320px;
     min-width: fit-content;
+}
+
+#question-output-table {
+    margin: 5px 5px 20px;
 }
