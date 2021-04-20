@@ -6,7 +6,7 @@ header {
     border-color: lightgray;
 }
 
-.flex-container {
+.flex-header {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -27,7 +27,7 @@ header {
 
 .header-item.center {
     text-align: center;
-    min-width: 80px;
+    min-width: 252px;
 }
 
 .header-item.right {
