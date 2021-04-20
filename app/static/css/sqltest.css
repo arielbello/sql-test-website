@@ -8,17 +8,42 @@ input.btn {
     width: 100px;
 }
 
-.col-sm-6 {
-    word-break: break-word;
+div.tables-flex{
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: left;
 }
 
-.table {
+div.test-flex {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+div.test-question {
+    margin: 10px;
+    flex: 1 1 400px;
+}
+
+div.test-interface {
+    margin: 10px;
+    flex: 1 1 300px;
+}
+
+div.table {
     border-color: lightgray;
-    border-width: 1px;
-    border-style: solid;
     word-wrap: break-word;
     max-width: 400px;
-    padding: 5px 10px;
+    flex: 1 1 200px;
+    margin: 5px 10px;
+}
+
+table {
+    border-width: 1px;
+    border-style: solid;
+    border-color: lightgray;
 }
 
 .bordered {
@@ -46,6 +71,7 @@ input.btn {
 
 .table-name {
     font-weight: bold;
+    padding-left: 5px;
 }
 
 #question-container {
