@@ -4,7 +4,7 @@ import datetime
 class Config(object):
     APPLICATION_ROOT = '/'
     DEBUG = False
-    DB_FOLDER = 'app/sql_test/assets/'
+    DB_FOLDER = 'assets/'
     ENV = 'production'
     EXPLAIN_TEMPLATE_LOADING = False
     JSONIFY_MIMETYPE = 'application/json'
@@ -14,7 +14,7 @@ class Config(object):
     MAX_CONTENT_LENGTH = None
     MAX_COOKIE_SIZE = 4093
     PERMANENT_SESSION_LIFETIME = datetime.timedelta(days=31)
-    PREFERRED_URL_SCHEME = 'http'
+    PREFERRED_URL_SCHEME = 'https'
     PRESERVE_CONTEXT_ON_EXCEPTION = None
     PROPAGATE_EXCEPTIONS = None
     # TODO set a key when deploying

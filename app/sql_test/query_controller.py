@@ -1,5 +1,5 @@
-from flask import session, current_app
 import pandas as pd
+from flask import current_app
 from sqlalchemy import create_engine
 from sqlalchemy.exc import OperationalError
 
@@ -21,8 +21,8 @@ class DbResponse:
 def setup_engine():
     global engine
     if not engine:
-        engine = create_engine(f"sqlite:///{current_app.config['DB_PATH']}",
-                               echo=True)
+        dbpath = f"sqlite:///{current_app.config['DB_PATH']}"
+        engine = create_engine(dbpath, echo=True)
     return engine
 
 

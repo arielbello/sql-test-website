@@ -17,7 +17,7 @@
 <hr>
 
 <div id="results">
-    <h2>Results</h2>
+    <h3>Query results</h3>
     {% if errormsg %}
     <div class="alert alert-danger" role="alert">
         {{ errormsg }}
@@ -32,7 +32,11 @@
     </div>
     {% elif has_rows %}
     <div class="alert alert-warning" role="alert">
-        Wrong answer
+        Incorrect answer
+    </div>
+    {% else %}
+    <div>
+        <p>your results will be displayed here</p>
     </div>
     {% endif %}
     

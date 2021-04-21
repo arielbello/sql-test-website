@@ -1,14 +1,14 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
-from app.sql_test.sql_page import sqltest
-from app.home.home_page import home
-from app.routes import Routes
-from app import config
+import config
+from home.home_page import home
+from routes import Routes
+from sql_test.sql_page import sqltest
 
 
 def configure():
     if app.config["ENV"] == "production":
-        app.config.from_object(config.Config)
+        app.config.from_object(config.ProductionConfig)
     elif app.config["ENV"] == "test":
         app.config.from_object(config.TestingConfig)
     else:

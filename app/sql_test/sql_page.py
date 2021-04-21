@@ -1,3 +1,5 @@
+import os
+from flask import current_app
 from flask import Blueprint, request, render_template, session, url_for
 from email_validator import validate_email, EmailNotValidError
 from .query_controller import run_query
@@ -17,6 +19,8 @@ def _write_to_db(query):
 def submit_query():
     form = SqlForm()
     query = form.sql.data
+    if not query:
+        return ('', 204)
     if request.form.get("run"):
         dbres = run_query(query)
         if dbres.successful:

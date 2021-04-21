@@ -9,6 +9,7 @@
             "type": "python",
             "request": "launch",
             "module": "flask",
+            "cwd": "${workspaceFolder}/app",
             "env": {
                 "FLASK_APP": "app/main.py",
                 "FLASK_ENV": "development"

@@ -1,5 +1,4 @@
 from app.main import app
-from flask import session
 import pytest
 
 
