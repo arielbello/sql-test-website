@@ -1,10 +1,21 @@
 from flask import session, current_app
 import pandas as pd
 from sqlalchemy import create_engine
+from sqlalchemy.exc import OperationalError
 
 
 answer = None
 engine = None
+
+
+class DbResponse:
+    def __init__(self, successful, result, accepted=False,
+                 count=0, exec_time=-1):
+        self.successful = successful
+        self.result = result
+        self.accepted = accepted
+        self.exec_time = exec_time
+        self.count = count
 
 
 def setup_engine():
@@ -15,17 +26,23 @@ def setup_engine():
     return engine
 
 
-def run_query(statement: str) -> pd.DataFrame:
+def run_query(statement: str, fetchall=False) -> DbResponse:
     engine = setup_engine()
-    if session.get("query") == statement:
-        # TODO return cache
-        pass
-    result = pd.read_sql(statement, engine)
-    session["query"] = statement
-    return result
+    try:
+        result = pd.read_sql(statement, engine)
+    except OperationalError as e:
+        return DbResponse(False, e.orig.args[0])
+    except Exception as e:
+        return DbResponse(False, e.args[0])
+
+    if not fetchall:
+        result = result[:10]
+    answer = expected_result()
+    accepted = (answer.equals(result))
+    return DbResponse(True, result, accepted, count=len(result))
 
 
-def check_result(statement: pd.DataFrame) -> bool:
+def expected_result() -> pd.DataFrame:
     engine = setup_engine()
     query = """
         SELECT G.device_cat, COUNT(DISTINCT g.user_id) FROM users U
@@ -34,9 +51,8 @@ def check_result(statement: pd.DataFrame) -> bool:
         GROUP BY device_cat
         ORDER BY COUNT(DISTINCT g.user_id)
     """
-    rows = run_query(statement)
     global answer
     if not isinstance(answer, pd.DataFrame):
         answer = pd.read_sql(query, engine)
 
-    return (answer.equals(rows))
+    return answer
