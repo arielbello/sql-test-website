@@ -1,3 +1,4 @@
+import time
 import pandas as pd
 from flask import current_app
 from sqlalchemy import create_engine
@@ -22,14 +23,16 @@ def setup_engine():
     global engine
     if not engine:
         dbpath = f"sqlite:///{current_app.config['TEST_DB_PATH']}"
-        engine = create_engine(dbpath, echo=True)
+        engine = create_engine(dbpath, echo=False)
     return engine
 
 
 def run_query(statement: str, fetchall=False) -> DbResponse:
     engine = setup_engine()
     try:
+        start_time =  time.time()
         result = pd.read_sql(statement, engine)
+        exec_time = time.time() - start_time
     except OperationalError as e:
         return DbResponse(False, e.orig.args[0])
     except Exception as e:
@@ -39,7 +42,8 @@ def run_query(statement: str, fetchall=False) -> DbResponse:
         result = result[:10]
     answer = expected_result()
     accepted = (answer.equals(result))
-    return DbResponse(True, result, accepted, count=len(result))
+    return DbResponse(True, result, accepted, count=len(result), 
+                      exec_time=exec_time)
 
 
 def expected_result() -> pd.DataFrame:

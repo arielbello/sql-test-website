@@ -3,34 +3,44 @@ from flask import Blueprint, request, render_template, session, url_for
 from email_validator import validate_email, EmailNotValidError
 from .query_controller import run_query
 from .forms import SqlForm
+from .server_db import write_entry
 import pandas as pd
 
 
 sqltest = Blueprint("sqltest", __name__)
 
 
-def _write_to_db(query):
-    # TODO write to postgres
-    pass
+def render_run(result, accepted, success):
+    if success:
+        return test_index(result=result, accepted=accepted)
+    else:
+        return test_index(errormsg=result, accepted=accepted)
+
+
+def render_submit(query, accepted, exec_time):
+    success = write_entry(query=query, email=session.get("email"),
+                          accepted=accepted, exec_time=exec_time)
+    if success:
+        return test_index(submit=True)
+    else:
+        return test_index(errormsg="Unable to submit", submit=False)
 
 
 @sqltest.route("/", methods=["POST"])
 def submit_query():
     form = SqlForm()
-    query = form.sql.data
     if not form.validate_on_submit():
         errormsg = form.sql.errors[0] if form.sql.errors else None
         return test_index(errormsg=errormsg)
 
+    query = form.sql.data
+    dbres = run_query(query)
+    accepted = dbres.accepted
     if request.form.get("run"):
-        dbres = run_query(query)
-        if dbres.successful:
-            return test_index(result=dbres.result, accepted=dbres.accepted)
-        else:
-            return test_index(errormsg=dbres.result, accepted=dbres.accepted)
+        return render_run(accepted=accepted, result=dbres.result,
+                          success=dbres.successful)
     elif request.form.get("submit"):
-        _write_to_db(query)
-        return test_index(submit=True)
+        return render_submit(query, accepted, dbres.exec_time)
 
 
 @sqltest.route("/", methods=["GET"])
