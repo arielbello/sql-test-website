@@ -1,6 +1,8 @@
 # My files
 .VSCodeCounter/
 .gcloudignore
+# Ignore app.yaml to add secrets
+app.yaml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

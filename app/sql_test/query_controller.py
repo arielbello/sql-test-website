@@ -21,7 +21,7 @@ class DbResponse:
 def setup_engine():
     global engine
     if not engine:
-        dbpath = f"sqlite:///{current_app.config['DB_PATH']}"
+        dbpath = f"sqlite:///{current_app.config['TEST_DB_PATH']}"
         engine = create_engine(dbpath, echo=True)
     return engine
 

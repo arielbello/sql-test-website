@@ -104,3 +104,7 @@ table {
 #question-output-table {
     margin: 5px 5px 20px;
 }
+
+#results {
+    max-width: 500px%;
+}

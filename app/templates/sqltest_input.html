@@ -1,7 +1,7 @@
 <form action={{action}} method="POST">
     {{ form.csrf_token }}
 
-    {{ form.sql(class="input-sql bordered", placeholder="Write your query here.\nExample:\nSELECT * FROM Users") }}
+    {{ form.sql(class="input-sql bordered") }}
 
     {% if form.errors %}
     <!-- server side errors -->
@@ -19,6 +19,7 @@
 <div id="results">
     <h3>Query results</h3>
     {% if errormsg %}
+    <!-- TODO change alert for smth else -->
     <div class="alert alert-danger" role="alert">
         {{ errormsg }}
     </div>

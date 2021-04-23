@@ -1,5 +1,4 @@
-import os
-from flask import current_app
+from flask import redirect
 from flask import Blueprint, request, render_template, session, url_for
 from email_validator import validate_email, EmailNotValidError
 from .query_controller import run_query
@@ -19,8 +18,10 @@ def _write_to_db(query):
 def submit_query():
     form = SqlForm()
     query = form.sql.data
-    if not query:
-        return ('', 204)
+    if not form.validate_on_submit():
+        errormsg = form.sql.errors[0] if form.sql.errors else None
+        return test_index(errormsg=errormsg)
+
     if request.form.get("run"):
         dbres = run_query(query)
         if dbres.successful:
@@ -39,7 +40,7 @@ def test_index(errormsg=None, result=None, submit=False, accepted=False):
         email = validate_email(email, check_deliverability=False)
     except EmailNotValidError:
         print("attempting test with an invalid email:", email)
-        return "400"
+        return redirect(url_for("home.index"), 403)
 
     sql_form = SqlForm()
     has_rows = isinstance(result, pd.DataFrame)

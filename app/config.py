@@ -1,10 +1,14 @@
 import datetime
+import os
 
 
 class Config(object):
     APPLICATION_ROOT = '/'
     DEBUG = False
-    DB_FOLDER = 'assets/'
+    TEST_DB_FOLDER = 'assets/'
+    DB_URL = os.getenv("DB_URL", "<server-db-ur>")
+    DB_PORT = os.getenv("DB_PORT", "<server-db-ur>")
+    DB_NAME = os.getenv("DB_NAME", "<server-db-ur>")
     ENV = 'production'
     EXPLAIN_TEMPLATE_LOADING = False
     JSONIFY_MIMETYPE = 'application/json'
@@ -36,19 +40,19 @@ class Config(object):
 
 
 class ProductionConfig(Config):
-    DB_NAME = "test.db"
-    DB_USERNAME = "<username>"
-    DB_PASSWORD = "<password>"
-    DB_PATH = Config.DB_FOLDER + DB_NAME
+    DB_USER = os.getenv("DB_USER", default="<db-user>")
+    DB_PASSWORD = os.getenv("DB_PASSWORD", default="<password>")
+    TEST_DB_NAME = "test.db"
+    TEST_DB_PATH = Config.TEST_DB_FOLDER + TEST_DB_NAME
 
 
 class DevelopmentConfig(Config):
     DEBUG = True
     ENV = "development"
-    DB_NAME = "test.db"
-    DB_USERNAME = "<username>"
-    DB_PASSWORD = "<password>"
-    DB_PATH = Config.DB_FOLDER + DB_NAME
+    TEST_DB_NAME = "test.db"
+    DB_USER = os.getenv("DB_USER", default="<db-user>")
+    DB_PASSWORD = os.getenv("DB_PASSWORD", default="<password>")
+    TEST_DB_PATH = Config.TEST_DB_FOLDER + TEST_DB_NAME
 
     SESSION_COOKIE_SECURE = False
 
@@ -56,9 +60,9 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     TESTING = True
     ENV = "test"
-    DB_NAME = "test.db"
-    DB_USERNAME = "<username>"
-    DB_PASSWORD = "<password>"
-    DB_PATH = Config.DB_FOLDER + DB_NAME
+    TEST_DB_NAME = "test.db"
+    TEST_DB_PATH = Config.TEST_DB_FOLDER + TEST_DB_NAME
+    DB_USER = os.getenv("DB_USER", default="<db-user>")
+    DB_PASSWORD = os.getenv("DB_PASSWORD", default="<password>")
 
     SESSION_COOKIE_SECURE = False
