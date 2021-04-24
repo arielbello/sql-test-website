@@ -49,7 +49,11 @@ def write_entry(email, query, accepted, exec_time):
         else:
             success = True if cursor.rowcount == 1 else False
 
-    cnx.commit()
-    cnxpool.putconn(cnx)
+    try:
+        cnx.commit()
+        cnxpool.putconn(cnx)
+    except Exception:
+        print("connection already closed")
+        success = False
 
     return success

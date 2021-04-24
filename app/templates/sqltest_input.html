@@ -9,8 +9,8 @@
     {% endif %}
 
     <div class="form-buttons">
-        <span> {{ form.run(class="btn btn-secondary") }} </span>
-        <span> {{ form.submit(class="btn btn-primary") }} </span>
+        <span> {{ form.run(class="btn btn-default") }} </span>
+        <span> {{ form.submit(class="btn btn-default primary") }} </span>
     </div>
 </form>
 
@@ -56,7 +56,11 @@
             <tr>
             {% for col in row[1:] %}
                 <td>
-                    {{ col }}
+                    {% if col != None %}
+                        {{ col }}  
+                    {% else %}
+                        Null
+                    {% endif %}
                 </td>
             {% endfor %}
             </tr>
