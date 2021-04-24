@@ -30,7 +30,7 @@ def setup_engine():
 def run_query(statement: str, fetchall=False) -> DbResponse:
     engine = setup_engine()
     try:
-        start_time =  time.time()
+        start_time = time.time()
         result = pd.read_sql(statement, engine)
         exec_time = time.time() - start_time
     except OperationalError as e:
@@ -38,11 +38,14 @@ def run_query(statement: str, fetchall=False) -> DbResponse:
     except Exception as e:
         return DbResponse(False, e.args[0])
 
-    if not fetchall:
-        result = result[:10]
     answer = expected_result()
     accepted = (answer.equals(result))
-    return DbResponse(True, result, accepted, count=len(result), 
+    count = len(result)
+    if not fetchall:
+        result = result.iloc[:10]
+    if "index" in result.columns:
+        result.drop("index", axis=1, inplace=True)
+    return DbResponse(True, result, accepted, count=count,
                       exec_time=exec_time)
 
 

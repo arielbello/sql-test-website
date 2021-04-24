@@ -37,13 +37,32 @@
     </div>
     {% else %}
     <div>
-        <p>your results will be displayed here</p>
+        <p id="results-placeholder">Your results will be displayed here</p>
     </div>
     {% endif %}
     
     {% if has_rows %}
-        {% for row in result.itertuples() %}
-        <p> {{ row[:] }} </p>
+    <div id="table-result">
+        <table class="table table-striped tables-flex">
+        <thead>
+            <tr>
+        {% for col in result.columns %}    
+            <th scope="col">{{col}}</th>
         {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+        {% for row in result.itertuples() %}
+            <tr>
+            {% for col in row[1:] %}
+                <td>
+                    {{ col }}
+                </td>
+            {% endfor %}
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
     {% endif %}
 </div>
