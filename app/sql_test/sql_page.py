@@ -18,9 +18,7 @@ def render_run(dbres: DbResponse):
         return test_index(errormsg=dbres.errormsg, accepted=dbres.accepted)
 
 
-def render_submit(query: str, dbres: DbResponse):
-    success = write_entry(query=query, email=session.get("email"),
-                          accepted=dbres.accepted, exec_time=dbres.exec_time)
+def render_submit(query: str, success: bool):
     if success:
         return test_index(submit=True)
     else:
@@ -39,7 +37,10 @@ def submit_query():
     if request.form.get("run"):
         return render_run(dbres)
     elif request.form.get("submit"):
-        return render_submit(query, dbres)
+        success = write_entry(query=query, email=session.get("email"),
+                              accepted=dbres.accepted,
+                              exec_time=dbres.exec_time)
+        return render_submit(query, success)
 
 
 @sqltest.route("/", methods=["GET"])

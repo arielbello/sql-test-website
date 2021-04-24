@@ -31,13 +31,14 @@ def setup_engine():
 def run_query(statement: str, fetchall=False) -> DbResponse:
     engine = setup_engine()
     try:
+        exec_time = -1
         start_time = time.time()
         result = pd.read_sql(statement, engine)
         exec_time = time.time() - start_time
     except OperationalError as e:
-        return DbResponse(False, errormsg=e.orig.args[0])
+        return DbResponse(False, errormsg=e.orig.args[0], exec_time=exec_time)
     except Exception as e:
-        return DbResponse(False, errormsg=e.args[0])
+        return DbResponse(False, errormsg=e.args[0], exec_time=exec_time)
 
     answer = expected_result()
     accepted = (answer.equals(result))
