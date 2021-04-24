@@ -51,10 +51,10 @@ def expected_result() -> pd.DataFrame:
     query = """
         SELECT G.device_cat, COUNT(DISTINCT g.user_id) FROM users U
         INNER JOIN google_users G ON G.user_id=U.user_id
-            AND last_login LIKE '%2019-07%'
+              AND last_login LIKE '%2019-07%'
         GROUP BY device_cat
-        ORDER BY COUNT(DISTINCT g.user_id)
-    """
+        ORDER BY COUNT(DISTINCT g.user_id) DESC
+        """
     global answer
     if not isinstance(answer, pd.DataFrame):
         answer = pd.read_sql(query, engine)
