@@ -53,7 +53,7 @@ table {
 
 .input-sql {
     resize: vertical;
-    height: 200px;
+    height: 180px;
     min-height: 50px;
     max-height: 400px;
     width: 100%;
@@ -71,6 +71,11 @@ table {
 .table-name {
     font-weight: bold;
     padding-left: 5px;
+}
+
+.info-text {
+    font-style: italic;
+    font-size: 16px;
 }
 
 #question-container {
@@ -103,17 +108,16 @@ table {
     margin: 5px 5px 20px;
 }
 
-#results-placeholder {
-    font-style: italic;
-    font-size: 16px;
-    font-family: monospace, sans-serif;
-}
-
 #table-result {
-    white-space: normal;
     min-width: 200px;
     word-break: normal;
+    white-space: nowrap;
     overflow: auto;
+    margin-bottom: 5px;
+}
+
+#input-delimiter {
+    margin-top: 42px;
 }
 
 #results {

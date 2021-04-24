@@ -10,10 +10,11 @@ engine = None
 
 
 class DbResponse:
-    def __init__(self, successful, result, accepted=False,
+    def __init__(self, successful, result=None, accepted=False, errormsg="",
                  count=0, exec_time=-1):
         self.successful = successful
         self.result = result
+        self.errormsg = errormsg
         self.accepted = accepted
         self.exec_time = exec_time
         self.count = count
@@ -34,9 +35,9 @@ def run_query(statement: str, fetchall=False) -> DbResponse:
         result = pd.read_sql(statement, engine)
         exec_time = time.time() - start_time
     except OperationalError as e:
-        return DbResponse(False, e.orig.args[0])
+        return DbResponse(False, errormsg=e.orig.args[0])
     except Exception as e:
-        return DbResponse(False, e.args[0])
+        return DbResponse(False, errormsg=e.args[0])
 
     answer = expected_result()
     accepted = (answer.equals(result))
@@ -45,7 +46,7 @@ def run_query(statement: str, fetchall=False) -> DbResponse:
         result = result.iloc[:10]
     if "index" in result.columns:
         result.drop("index", axis=1, inplace=True)
-    return DbResponse(True, result, accepted, count=count,
+    return DbResponse(True, result, accepted=accepted, count=count,
                       exec_time=exec_time)
 
 

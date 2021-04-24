@@ -14,7 +14,7 @@
     </div>
 </form>
 
-<hr>
+<hr id="input-delimiter">
 
 <div id="results">
     <h3>Query results</h3>
@@ -37,7 +37,7 @@
     </div>
     {% else %}
     <div>
-        <p id="results-placeholder">Your results will be displayed here</p>
+        <p class="info-text">Your results will be displayed here</p>
     </div>
     {% endif %}
     
@@ -64,5 +64,8 @@
         </tbody>
         </table>
     </div>
+    {% if rows_info %}
+    <p class="info-text"> {{ rows_info }} </p>
+    {% endif %}
     {% endif %}
 </div>

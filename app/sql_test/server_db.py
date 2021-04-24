@@ -12,18 +12,30 @@ def setup_engine():
             'user': current_app.config["DB_USER"],
             'password': current_app.config["DB_PASSWORD"],
             'database': current_app.config["DB_NAME"],
-            'host': current_app.config["DB_HOST"]
+            'host': current_app.config["DB_HOST"],
+            'connect_timeout': 5,
         }
         if current_app.config.get("ENV") == "development":
             db_config["port"] = current_app.config["DB_PORT"]
 
-        cnxpool = psycopg2.pool.ThreadedConnectionPool(minconn=1, maxconn=3,
-                                                       **db_config)
+        try:
+            cnxpool = psycopg2.pool.ThreadedConnectionPool(minconn=1,
+                                                           maxconn=3,
+                                                           **db_config)
+        except Exception:
+            print("Unable to connect to server db")
+            return None
+
     return cnxpool
 
 
 def write_entry(email, query, accepted, exec_time):
-    cnx = setup_engine().getconn()
+    pool = setup_engine()
+    if not pool:
+        return False
+
+    cnx = pool.getconn()
+    success = False
     with cnx.cursor() as cursor:
         try:
             cursor.execute("""
@@ -33,9 +45,8 @@ def write_entry(email, query, accepted, exec_time):
                 (email, query, accepted, exec_time)
             )
         except Exception as e:
-            success = False
             print(f"Unable to run the query {e.args}")
-        finally:
+        else:
             success = True if cursor.rowcount == 1 else False
 
     cnx.commit()
