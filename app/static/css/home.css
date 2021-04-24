@@ -1,8 +1,9 @@
 .container {
     vertical-align: auto;
+    text-align: center;
     margin: auto;
     margin-top: 50px;
-    text-align: center;
+    padding: 20px;
 }
 
 .intro-text {
@@ -16,6 +17,10 @@
 
 .bullet-points {
     margin: 8px 0px;
+    margin-bottom: 20px;
+    font-size: 21px;
+    font-weight: 300;
+    line-height: 1.4;
 }
 
 .email-container {
@@ -29,7 +34,7 @@
     font-size:medium;
     text-align: left;
     font-weight: lighter;
-    margin-bottom: 4px;
+    margin: 0px 10px 5px;
     color: #202020;
 }
 
@@ -38,10 +43,4 @@ input.email {
     height: 40px;
     margin: auto;
     font-size: large;
-}
-
-.btn-primary {
-    margin-top: 10px;
-    width: 100%;
-    background-color: #6f4aa0;
 }

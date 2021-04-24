@@ -4,15 +4,12 @@
 }
 
 body {
-    min-width: 500px;
+    min-width: 900px;
     font-family: sans-serif;
 }
 
 div.container {
-    height: 100%;
-    width : 50%;
     min-width: 500px;
-    padding: 0px;
 }
 
 .alert {
@@ -44,4 +41,17 @@ div#footer {
     width: 100%;
     height: 30px;
     background-color: rgb(51, 48, 0);
+}
+
+.btn-default {
+    background-color: #4c4b4b;
+    color: white;
+}
+
+.btn-default.primary {
+    background-color: #6f4aa0;
+}
+
+.btn-lg {
+    width: 100%;
 }

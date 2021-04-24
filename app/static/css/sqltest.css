@@ -10,7 +10,7 @@ input.btn {
 
 div.test-flex {
     width: 100%;
-    min-width: fit-content;
+    min-width: 800px;
     display: grid;
     column-gap: 20px;
     grid-template-columns: 50% 50%;
@@ -27,8 +27,8 @@ div.test-question {
     min-width: fit-content;
 }
 
-div.test-interface {
-}
+/* div.test-interface {
+} */
 
 div.table {
     border-color: lightgray;
@@ -87,9 +87,8 @@ table {
     margin-left: 40px;
 }
 
-#question-title {
-   
-}
+/* #question-title {
+} */
 
 #question-text {
     font-size: large;
@@ -120,5 +119,5 @@ table {
     margin-top: 42px;
 }
 
-#results {
-}
+/* #results {
+} */
