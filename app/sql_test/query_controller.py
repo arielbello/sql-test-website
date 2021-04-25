@@ -40,8 +40,7 @@ def run_query(statement: str, fetchall=False) -> DbResponse:
     except Exception as e:
         return DbResponse(False, errormsg=e.args[0], exec_time=exec_time)
 
-    answer = expected_result()
-    accepted = (answer.equals(result))
+    accepted = check_result(result)
     count = len(result)
     if not fetchall:
         result = result.iloc[:10]
@@ -49,6 +48,17 @@ def run_query(statement: str, fetchall=False) -> DbResponse:
         result.drop("index", axis=1, inplace=True)
     return DbResponse(True, result, accepted=accepted, count=count,
                       exec_time=exec_time)
+
+
+def check_result(df) -> bool:
+    original_cols = df.columns
+    # Normalizing columns so column names don't affect results
+    df.columns = [i for i in range(len(original_cols))]
+    answer = expected_result()
+    accepted = answer.equals(df)
+    df.columns = original_cols
+
+    return accepted
 
 
 def expected_result() -> pd.DataFrame:
@@ -63,5 +73,7 @@ def expected_result() -> pd.DataFrame:
     global answer
     if not isinstance(answer, pd.DataFrame):
         answer = pd.read_sql(query, engine)
+        # Normalizing columns so column names don't affect results
+        answer.columns = [i for i in range(len(answer.columns))]
 
     return answer
