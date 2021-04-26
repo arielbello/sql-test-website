@@ -6,9 +6,16 @@ class Config(object):
     APPLICATION_ROOT = '/'
     DEBUG = False
     TEST_DB_FOLDER = 'assets/'
-    DB_URL = os.getenv("DB_URL", "<server-db-ur>")
-    DB_PORT = os.getenv("DB_PORT", "<server-db-ur>")
-    DB_NAME = os.getenv("DB_NAME", "<server-db-ur>")
+    if os.environ.get('GAE_ENV') == 'standard':
+        # If deployed, use the local socket interface for accessing Cloud SQL
+        host = f'/cloudsql/{os.getenv("DB_HOST")}'
+    else:
+        host = '127.0.0.1'
+
+    DB_HOST = host
+    DB_PORT = os.getenv("DB_PORT", "3306")
+    DB_NAME = os.getenv("DB_NAME", "<server-db-name>")
+    TEST_DB_PATH = "assets/test.db"
     ENV = 'production'
     EXPLAIN_TEMPLATE_LOADING = False
     JSONIFY_MIMETYPE = 'application/json'
@@ -22,7 +29,7 @@ class Config(object):
     PRESERVE_CONTEXT_ON_EXCEPTION = None
     PROPAGATE_EXCEPTIONS = None
     # TODO set a key when deploying
-    SECRET_KEY = '<secret_key>'
+    SECRET_KEY = os.getenv("SECRET_KEY", "<secret_key>")
     SEND_FILE_MAX_AGE_DEFAULT = datetime.timedelta(seconds=43200)
     SERVER_NAME = None
     SESSION_COOKIE_DOMAIN = None
@@ -42,17 +49,13 @@ class Config(object):
 class ProductionConfig(Config):
     DB_USER = os.getenv("DB_USER", default="<db-user>")
     DB_PASSWORD = os.getenv("DB_PASSWORD", default="<password>")
-    TEST_DB_NAME = "test.db"
-    TEST_DB_PATH = Config.TEST_DB_FOLDER + TEST_DB_NAME
 
 
 class DevelopmentConfig(Config):
     DEBUG = True
     ENV = "development"
-    TEST_DB_NAME = "test.db"
     DB_USER = os.getenv("DB_USER", default="<db-user>")
     DB_PASSWORD = os.getenv("DB_PASSWORD", default="<password>")
-    TEST_DB_PATH = Config.TEST_DB_FOLDER + TEST_DB_NAME
 
     SESSION_COOKIE_SECURE = False
 
@@ -60,8 +63,6 @@ class DevelopmentConfig(Config):
 class TestingConfig(Config):
     TESTING = True
     ENV = "test"
-    TEST_DB_NAME = "test.db"
-    TEST_DB_PATH = Config.TEST_DB_FOLDER + TEST_DB_NAME
     DB_USER = os.getenv("DB_USER", default="<db-user>")
     DB_PASSWORD = os.getenv("DB_PASSWORD", default="<password>")
 

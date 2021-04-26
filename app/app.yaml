@@ -1,4 +1,9 @@
 runtime: python39
 
 env_variables:
-  FLASK_ENV: development
+  FLASK_ENV: production
+  DB_HOST: app-engine-host
+  DB_USER: remote-db-user
+  DB_NAME: remote-db-name
+  DB_PASSWORD: remote-db-passs
+  SECRET_KEY: flask-secret-key
